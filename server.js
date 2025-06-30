@@ -7,7 +7,12 @@ const nodemailer = require('nodemailer');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://imaginative-raindrop-15e27b.netlify.app', // your Netlify frontend URL
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
+
 app.use(bodyParser.json());
 
 // Email configuration
