@@ -7,11 +7,23 @@ const nodemailer = require('nodemailer');
 const app = express();
 
 // Middleware
+const allowedOrigins = [
+  'https://imaginative-raindrop-15e27b.netlify.app',
+  'http://localhost:5173' // optional for local testing
+];
+
 app.use(cors({
-  origin: 'https://imaginative-raindrop-15e27b.netlify.app', // your Netlify frontend URL
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST'],
   credentials: true
 }));
+
 
 app.use(bodyParser.json());
 
