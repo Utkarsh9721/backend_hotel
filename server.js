@@ -113,6 +113,9 @@ app.post('/api/orders', async (req, res) => {
     });
   }
 });
+app.get('/', (req, res) => {
+  res.send("hello from backend");
+});
 
 // Start server
 const PORT = process.env.PORT || 5000;
